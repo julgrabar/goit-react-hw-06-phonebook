@@ -1,19 +1,28 @@
-import PropTypes from "prop-types"
+import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { deleteContact } from 'redux/contactsSlice';
 
-export const ContactsItem = ({ id, name, number, onDeleteBtn }) => (
-  <li>
-    <span>
-      {name}: {number}
-    </span>
-    <button type="button" className="delete-btn" onClick={() => onDeleteBtn(id)}>
-      <span className="material-icons">delete</span>
-    </button>
-  </li>
-);
+export const ContactsItem = ({ id, name, number }) => {
+  const dispatch = useDispatch();
+
+  return (
+    <li>
+      <span>
+        {name}: {number}
+      </span>
+      <button
+        type="button"
+        className="delete-btn"
+        onClick={() => dispatch(deleteContact(id))}
+      >
+        <span className="material-icons">delete</span>
+      </button>
+    </li>
+  );
+};
 
 ContactsItem.propTypes = {
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   number: PropTypes.string.isRequired,
-  onDeleteBtn: PropTypes.func.isRequired
-}
+};
